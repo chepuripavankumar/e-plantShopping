@@ -1,7 +1,21 @@
-import React from "react";
-import Navbar from "./Navbar";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../redux/CartSlice";
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../redux/CartSlice';
+
+function ProductList() {
+  const dispatch = useDispatch();
+
+  const handleAdd = (product) => {
+    dispatch(addToCart(product));
+  };
+
+  return (
+    <button onClick={() => handleAdd({ id: 1, name: 'Laptop' })}>
+      Add to Cart
+    </button>
+  );
+}
+
+export default ProductList;
 
 const plants = [
   // Indoor Plants
