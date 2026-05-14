@@ -1,5 +1,3 @@
-// src/redux/CartSlice.jsx
-
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -10,7 +8,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    // Add item to cart (or increase quantity if already present)
+    // Required by assignment
     addItem: (state, action) => {
       const existingItem = state.items.find(
         (item) => item.id === action.payload.id
@@ -26,15 +24,13 @@ const cartSlice = createSlice({
       }
     },
 
-    // Remove item completely from cart
     removeItem: (state, action) => {
       state.items = state.items.filter(
         (item) => item.id !== action.payload
       );
     },
 
-    // Update quantity of a specific item
-    // Payload format: { id: 1, quantity: 3 }
+    // Payload: { id, quantity }
     updateQuantity: (state, action) => {
       const { id, quantity } = action.payload;
 
@@ -53,7 +49,7 @@ const cartSlice = createSlice({
       }
     },
 
-    // Compatibility aliases so existing components continue to work
+    // Compatibility aliases for existing components
     addToCart: (state, action) => {
       const existingItem = state.items.find(
         (item) => item.id === action.payload.id
@@ -76,34 +72,33 @@ const cartSlice = createSlice({
     },
 
     increaseQuantity: (state, action) => {
-      const existingItem = state.items.find(
+      const item = state.items.find(
         (item) => item.id === action.payload
       );
 
-      if (existingItem) {
-        existingItem.quantity += 1;
+      if (item) {
+        item.quantity += 1;
       }
     },
 
     decreaseQuantity: (state, action) => {
-      const existingItem = state.items.find(
+      const item = state.items.find(
         (item) => item.id === action.payload
       );
 
-      if (!existingItem) return;
+      if (!item) return;
 
-      if (existingItem.quantity > 1) {
-        existingItem.quantity -= 1;
+      if (item.quantity > 1) {
+        item.quantity -= 1;
       } else {
         state.items = state.items.filter(
-          (item) => item.id !== action.payload
+          (cartItem) => cartItem.id !== action.payload
         );
       }
     },
   },
 });
 
-// Export both assignment-required and compatibility actions
 export const {
   addItem,
   removeItem,
@@ -114,4 +109,4 @@ export const {
   decreaseQuantity,
 } = cartSlice.actions;
 
-export default cartSlice.reducer;``
+export default cartSlice.reducer;

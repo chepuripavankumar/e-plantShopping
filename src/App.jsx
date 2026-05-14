@@ -3,52 +3,44 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 
+import AboutUs from "./components/AboutUs";
 import ProductList from "./components/ProductList";
 import CartItem from "./components/CartItem";
-import AboutUs from "./components/AboutUs";
 
-function HomePage() {
+function LandingPage() {
   return (
     <div
       style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundImage:
+          "url('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1400&q=80')",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        color: "white",
         textAlign: "center",
-        padding: "80px 20px",
-        fontFamily: "Arial, sans-serif",
+        padding: "20px",
       }}
     >
-      <h1
-        style={{
-          fontSize: "3rem",
-          color: "#2e7d32",
-          marginBottom: "20px",
-        }}
-      >
+      <h1 style={{ fontSize: "3rem", marginBottom: "20px" }}>
         Welcome to Paradise Nursery
       </h1>
 
-      <p
-        style={{
-          maxWidth: "800px",
-          margin: "0 auto 30px",
-          lineHeight: "1.8",
-          fontSize: "1.1rem",
-          color: "#555",
-        }}
-      >
-        Discover beautiful indoor and outdoor plants to brighten your home and
-        garden.
+      <p style={{ maxWidth: "700px", marginBottom: "30px", fontSize: "1.2rem" }}>
+        Your one-stop destination for beautiful indoor and outdoor plants.
       </p>
 
-      <Link to="/plants">
+      <Link to="/about">
         <button
           style={{
-            padding: "12px 30px",
-            fontSize: "1rem",
-            backgroundColor: "#2e7d32",
-            color: "white",
-            border: "none",
-            borderRadius: "6px",
+            padding: "12px 24px",
+            fontSize: "18px",
             cursor: "pointer",
+            border: "none",
+            borderRadius: "8px",
           }}
         >
           Get Started
@@ -63,10 +55,10 @@ function App() {
     <Provider store={store}>
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/about" element={<AboutUs />} />
           <Route path="/plants" element={<ProductList />} />
           <Route path="/cart" element={<CartItem />} />
-          <Route path="/about" element={<AboutUs />} />
         </Routes>
       </Router>
     </Provider>
