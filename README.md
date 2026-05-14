@@ -1,6 +1,6 @@
-# Paradise Nursery Shopping Application
+# e-plantshopping Shopping Application
 
-This is a React + Redux shopping cart application for Paradise Nursery.
+This is a React + Redux shopping cart application for e-plantshopping.
 
 ## Features
 - Browse plants by categories

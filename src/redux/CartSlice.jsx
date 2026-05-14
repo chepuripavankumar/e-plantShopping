@@ -1,59 +1,71 @@
+// src/redux/CartSlice.jsx
+
 import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+  items: [],
+};
 
 const cartSlice = createSlice({
   name: "cart",
-  initialState: {
-    items: [],
-    totalQuantity: 0,
-  },
+  initialState,
   reducers: {
     addToCart: (state, action) => {
-      const item = action.payload;
-      const existingItem = state.items.find((x) => x.id === item.id);
-
-      if (!existingItem) {
-        state.items.push({ ...item, quantity: 1 });
-        state.totalQuantity += 1;
-      }
-    },
-
-    removeFromCart: (state, action) => {
-      const id = action.payload;
-      const existingItem = state.items.find((x) => x.id === id);
+      const existingItem = state.items.find(
+        (item) => item.id === action.payload.id
+      );
 
       if (existingItem) {
-        state.totalQuantity -= existingItem.quantity;
-        state.items = state.items.filter((x) => x.id !== id);
+        existingItem.quantity += 1;
+      } else {
+        state.items.push({
+          ...action.payload,
+          quantity: 1,
+        });
       }
     },
 
     increaseQuantity: (state, action) => {
-      const id = action.payload;
-      const existingItem = state.items.find((x) => x.id === id);
+      const item = state.items.find(
+        (item) => item.id === action.payload
+      );
 
-      if (existingItem) {
-        existingItem.quantity += 1;
-        state.totalQuantity += 1;
+      if (item) {
+        item.quantity += 1;
       }
     },
 
     decreaseQuantity: (state, action) => {
-      const id = action.payload;
-      const existingItem = state.items.find((x) => x.id === id);
+      const item = state.items.find(
+        (item) => item.id === action.payload
+      );
 
-      if (existingItem && existingItem.quantity > 1) {
-        existingItem.quantity -= 1;
-        state.totalQuantity -= 1;
+      if (item) {
+        if (item.quantity > 1) {
+          item.quantity -= 1;
+        } else {
+          state.items = state.items.filter(
+            (cartItem) => cartItem.id !== action.payload
+          );
+        }
       }
+    },
+
+    removeFromCart: (state, action) => {
+      state.items = state.items.filter(
+        (item) => item.id !== action.payload
+      );
     },
   },
 });
 
+// Export all actions
 export const {
   addToCart,
-  removeFromCart,
   increaseQuantity,
   decreaseQuantity,
+  removeFromCart,
 } = cartSlice.actions;
 
+// Export reducer
 export default cartSlice.reducer;

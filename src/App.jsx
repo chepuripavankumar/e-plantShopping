@@ -1,37 +1,34 @@
+// src/App.jsx
+
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
-import "./App.css";
-import ProductList from "./components/ProductList.jsx";
-import CartItem from "./components/CartItem.jsx";
-import AboutUs from "./components/AboutUs.jsx";
-import Navbar from "./components/Navbar.jsx";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
-
-function LandingPage() {
-  const navigate = useNavigate();
-  return (
-    <div className="landing-page">
-      <h1>Paradise Nursery</h1>
-      <p>Your one-stop shop for beautiful houseplants!</p>
-
-      <button className="get-started-btn" onClick={() => navigate("/plants")}>
-        Get Started
-      </button>
-
-      <AboutUs />
-    </div>
-  );
-}
+import HomePage from "./components/AboutUs"; // Temporary landing page
+import ProductList from "./components/ProductList";
+import CartItem from "./components/CartItem";
+import AboutUs from "./components/AboutUs";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/plants" element={<ProductList />} />
-        <Route path="/cart" element={<CartItem />} />
-      </Routes>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          {/* Home route */}
+          <Route path="/" element={<HomePage />} />
+
+          {/* Products page */}
+          <Route path="/plants" element={<ProductList />} />
+
+          {/* Shopping cart */}
+          <Route path="/cart" element={<CartItem />} />
+
+          {/* About page */}
+          <Route path="/about" element={<AboutUs />} />
+        </Routes>
+      </Router>
+    </Provider>
   );
 }
 
