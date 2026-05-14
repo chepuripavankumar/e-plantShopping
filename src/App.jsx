@@ -1,32 +1,34 @@
+// src/App.jsx
+
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
-import ProductList from "./components/ProductList.jsx";
-import CartItem from "./components/CartItem.jsx";
-import AboutUs from "./components/AboutUs.jsx";
-
-import "./App.css";
-
-function LandingPage() {
-  return (
-    <div className="landing-page">
-      <h1>Paradise Nursery</h1>
-      <p>Your one-stop shop for beautiful house plants!</p>
-
-      <Link to="/plants">
-        <button className="get-started-btn">Get Started</button>
-      </Link>
-
-      <AboutUs />
-    </div>
-  );
-}
+import HomePage from "./components/HomePage";
+import ProductList from "./components/ProductList";
+import CartItem from "./components/CartItem";
+import AboutUs from "./components/AboutUs";
 
 function App() {
   return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          {/* Landing Page */}
+          <Route path="/" element={<HomePage />} />
+
+          {/* Product Listing Page */}
+          <Route path="/plants" element={<ProductList />} />
+
+          {/* Shopping Cart Page */}
+          <Route path="/cart" element={<CartItem />} />
+
+          {/* About Us Page */}
+          <Route path="/about" element={<AboutUs />} />
+        </Routes>
+      </Router>
+    </Provider>
   );
 }
 
