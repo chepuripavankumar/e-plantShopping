@@ -13,3 +13,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </Provider>
   </React.StrictMode>
 );
+export default function App() {
+  return <h1 style={{ color: "black" }}>App is Working</h1>;
+}
