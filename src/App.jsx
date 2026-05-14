@@ -1,22 +1,21 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
-import "./App.css";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+
 import ProductList from "./components/ProductList.jsx";
 import CartItem from "./components/CartItem.jsx";
 import AboutUs from "./components/AboutUs.jsx";
-import Navbar from "./components/Navbar.jsx";
 
+import "./App.css";
 
 function LandingPage() {
-  const navigate = useNavigate();
   return (
     <div className="landing-page">
-      <h1>welcome to Paradise Nursery</h1>
-      <p>Your one-stop shop for beautiful houseplants!</p>
+      <h1>Paradise Nursery</h1>
+      <p>Your one-stop shop for beautiful house plants!</p>
 
-      <button className="get-started-btn" onClick={() => navigate("/plants")}>
-        Get Started
-      </button>
+      <Link to="/plants">
+        <button className="get-started-btn">Get Started</button>
+      </Link>
 
       <AboutUs />
     </div>
@@ -25,9 +24,13 @@ function LandingPage() {
 
 function App() {
   return (
-    <div>
-      <h1>e-plantshopping</h1>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/plants" element={<ProductList />} />
+        <Route path="/cart" element={<CartItem />} />
+      </Routes>
+    </Router>
   );
 }
 
