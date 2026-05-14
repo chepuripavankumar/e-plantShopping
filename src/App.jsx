@@ -25,13 +25,9 @@ function LandingPage() {
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/plants" element={<ProductList />} />
-        <Route path="/cart" element={<CartItem />} />
-      </Routes>
-    </Router>
+    <div>
+      <h1>e-plantshopping</h1>
+    </div>
   );
 }
 
