@@ -50,8 +50,8 @@ const cartSlice = createSlice({
 });
 
 export const {
-  addToCart,
-  removeFromCart,
+  addItem(),
+  removeItem(),
   increaseQuantity,
   decreaseQuantity,
 } = cartSlice.actions;
